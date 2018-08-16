@@ -1,0 +1,36 @@
+#nav-bar {
+    border: 1px solid black;
+}
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+}
+
+nav a {
+    flex-grow: 1;
+    text-align: center;
+}
+
+#nav-border {
+    border-right: 2px solid black;
+    align-self: stretch;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    height: 83vh;
+}
+
+section:first-child {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid black;
+}
+
+/* img {
+    width: 500px;
+    height: 500px;
+} */

@@ -5,6 +5,17 @@
     <title>TV Demo</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="./manage.css">
+    <script>
+        function clickedSubmit() {
+            console.log('Clicked Submit')
+        }
+        function clickedDelete() {
+            console.log('Clicked Delete')
+        }
+        function clickedAdd(){
+            console.log('Clicked Add')
+        }
+    </script>
 </head>
 
 <body>
@@ -22,17 +33,17 @@
             </h1>
             <div>
                 <div>
-                    <button>Show 1</button>
-                    <button style="border-radius: 30px;">-</button>
+                    <button onclick="clickedSubmit()">Show 1</button>
+                    <button style="border-radius: 30px;" onclick="clickedDelete()">-</button>
                     <!-- this is the delete show button-->
                 </div>
                 <div>
-                    <button>Show 2</button>
-                    <button style="border-radius: 30px;">-</button>
+                    <button onclick="clickedSubmit()">Show 2</button>
+                    <button style="border-radius: 30px;" onclick="clickedDelete()">-</button>
                     <!-- this is the delete show button-->
                 </div>
                 <div>
-                    <button style="border-radius: 30px;">+</button>
+                    <button style="border-radius: 30px;" onclick="clickedAdd()">+</button>
                     <!-- this is the add show button-->
                 </div>
             </div>
@@ -55,7 +66,7 @@
                     <input type="text" name="showimage" value="Image URL">
                 </div>
                 <div>
-                    <button>Create/Update</button>
+                    <button onclick="clickedSubmit()">Create/Update</button>
                 </div>
             </div>
         </section>

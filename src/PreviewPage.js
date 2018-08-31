@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NavSite from './NavSite'
+import TVShow from './TVShow'
 import './App.css'
 
 class App extends Component {
@@ -15,8 +16,9 @@ class App extends Component {
                 <main>
                     <section>
                         <h1>Shows</h1>
-                        <button style={buttonStyle} onclick="clickedSubmit()">Show 1</button>
-                        <button style={buttonStyle} onclick="clickedSubmit()">Show 2</button>
+                        <TVShow Name="ST:TNG" />
+                        <TVShow Name="ST:TNG" style={buttonStyle} />
+                        {/* <button onclick="clickedSubmit()">Show 2</button> */}
                     </section>
                     <section>
                         <div>

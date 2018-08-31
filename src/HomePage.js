@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import NavSite from './NavSite'
+import TVShow from './TVShow'
 import './App.css'
 
 class App extends Component {
+
   render() {
     let buttonStyle = {
       borderRadius: '30px'
@@ -17,12 +19,12 @@ class App extends Component {
             <h1>Shows</h1>
             <div>
               <div>
-                <button onclick="clickedSubmit()">Show 1</button>
+                <TVShow Name="ST:TNG" allowDelete={true} />
                 <button style={buttonStyle} onclick="clickedDelete()">-</button>
                 {/* this is the delete show button */}
               </div>
               <div>
-                <button onclick="clickedSubmit()">Show 2</button>
+                <TVShow Name="ST: Voyager" />
                 <button style={buttonStyle} onclick="clickedDelete()">-</button>
                 {/* this is the delete show button */}
               </div>

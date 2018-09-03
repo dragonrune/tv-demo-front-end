@@ -13,6 +13,10 @@ class App extends Component {
     console.log("TVShowDeleted")
   }
 
+  saveShow = () => {
+    console.log("saveShow saved")
+  }
+
   render() {
     let buttonStyle = {
       borderRadius: '30px'
@@ -44,22 +48,22 @@ class App extends Component {
             <div>
               <div>
                 <label>Name: </label>
-                <input type="text" name="showname" />
-                {/* <input type="text" name="showname" value="Show Name" /> */}
+                {/* <input type="text" name="showname" /> */}
+                <input type="text" name="showname" value="Show Name" />
               </div>
               <div>
                 <label>Rating: </label>
-                <input type="text" name="showrating" />
-                {/* <input type="text" name="showrating" value="Show Rating" /> */}
+                {/* <input type="text" name="showrating" /> */}
+                <input type="text" name="showrating" value="Show Rating" />
               </div>
               <div>
                 <label>Image URL: </label>
-                <input type="text" name="showimage" />
-                {/* <input type="text" name="showimage" value="Image URL" /> */}
+                {/* <input type="text" name="showimage" /> */}
+                <input type="text" name="showimage" value="Image URL" />
               </div>
-              {/* <div>
-                <button onClick={this.clickedSubmit()}>Create/Update</button>
-              </div> */}
+              <div>
+                <button onClick={this.saveShow()}>Create/Update</button>
+              </div>
             </div>
           </section>
         </main>

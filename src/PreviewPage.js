@@ -16,9 +16,8 @@ class App extends Component {
                 <main>
                     <section>
                         <h1>Shows</h1>
-                        <TVShow Name="ST:TNG" />
-                        <TVShow Name="ST:TNG" style={buttonStyle} />
-                        {/* <button onclick="clickedSubmit()">Show 2</button> */}
+                        <TVShow Name="ST:TNG" buttonstyle={buttonStyle} />
+                        <TVShow Name="ST:Voyager" buttonstyle={buttonStyle} />
                     </section>
                     <section>
                         <div>

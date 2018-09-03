@@ -5,10 +5,19 @@ import './App.css'
 
 class App extends Component {
 
+  tvShowSelected = () => {
+    console.log("TVShowSelected")
+  }
+
+  tvShowDeleted = () => {
+    console.log("TVShowDeleted")
+  }
+
   render() {
     let buttonStyle = {
       borderRadius: '30px'
     }
+
     return (
       <div className="App">
         <header id="nav-bar">
@@ -19,17 +28,13 @@ class App extends Component {
             <h1>Shows</h1>
             <div>
               <div>
-                <TVShow Name="ST:TNG" allowDelete={true} />
-                <button style={buttonStyle} onclick="clickedDelete()">-</button>
-                {/* this is the delete show button */}
+                <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} Name="ST:TNG" allowDelete={true} buttonstyle={buttonStyle} />
               </div>
               <div>
-                <TVShow Name="ST: Voyager" />
-                <button style={buttonStyle} onclick="clickedDelete()">-</button>
-                {/* this is the delete show button */}
+                <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} Name="ST: Voyager" allowDelete={true} buttonstyle={buttonStyle} />
               </div>
               <div>
-                <button style={buttonStyle} onclick="clickedAdd()">Add Show +</button>
+                {/* <button style={buttonStyle} onClick={this.clickedAdd()}>Add Show +</button> */}
                 {/* this is the add show button */}
               </div>
             </div>
@@ -39,19 +44,22 @@ class App extends Component {
             <div>
               <div>
                 <label>Name: </label>
-                <input type="text" name="showname" value="Show Name" />
+                <input type="text" name="showname" />
+                {/* <input type="text" name="showname" value="Show Name" /> */}
               </div>
               <div>
                 <label>Rating: </label>
-                <input type="text" name="showrating" value="Show Rating" />
+                <input type="text" name="showrating" />
+                {/* <input type="text" name="showrating" value="Show Rating" /> */}
               </div>
               <div>
                 <label>Image URL: </label>
-                <input type="text" name="showimage" value="Image URL" />
+                <input type="text" name="showimage" />
+                {/* <input type="text" name="showimage" value="Image URL" /> */}
               </div>
-              <div>
-                <button onclick="clickedSubmit()">Create/Update</button>
-              </div>
+              {/* <div>
+                <button onClick={this.clickedSubmit()}>Create/Update</button>
+              </div> */}
             </div>
           </section>
         </main>

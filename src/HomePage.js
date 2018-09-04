@@ -6,15 +6,15 @@ import './App.css'
 class App extends Component {
 
   tvShowSelected = () => {
-    console.log("TVShowSelected")
+    return(console.log("TVShowSelected"))
   }
 
   tvShowDeleted = () => {
-    console.log("TVShowDeleted")
+    return(console.log("TVShowDeleted"))
   }
 
   saveShow = () => {
-    console.log("saveShow saved")
+    return(console.log("saveShow saved"))
   }
 
   render() {
@@ -62,7 +62,7 @@ class App extends Component {
                 <input type="text" name="showimage" value="Image URL" />
               </div>
               <div>
-                <button onClick={this.saveShow()}>Create/Update</button>
+                <button onClick={this.saveShow}>Create/Update</button>
               </div>
             </div>
           </section>

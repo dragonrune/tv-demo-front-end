@@ -5,23 +5,70 @@ import './App.css'
 
 class App extends Component {
 
+  state = {
+    buttonStyle: {
+      borderRadius: '30px'
+    },
+    nameInProgress: '',
+    ratingInProgress: '',
+    imageURLInProgress: '',
+    show: {
+      name: '',
+      rating: '',
+      ImageURL: ''
+    }
+  }
+
+  handleNameChange = (event) => {
+    this.setState({
+      nameInProgress: event.target.value
+    })
+  }
+
+  handleRatingChange = (event) => {
+    this.setState({
+      ratingInProgress: event.target.value
+    })
+  }
+
+  handleImageURLChange = (event) => {
+    this.setState({
+      imageURLInProgress: event.target.value
+    })
+  }
+
   tvShowSelected = () => {
-    return(console.log("TVShowSelected"))
+    return(console.log(this.state.show))
   }
 
   tvShowDeleted = () => {
-    return(console.log("TVShowDeleted"))
+    this.setState({
+      show: {
+        name: '',
+        rating: '',
+        imageURL: ''
+      }
+    })
+  }
+
+  renderShows = () => {
+    return <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} Name={this.state.show.name} allowDelete={true} buttonstyle={this.state.buttonStyle} />
   }
 
   saveShow = () => {
-    return(console.log("saveShow saved"))
+    this.setState({
+      show: {
+        name: this.state.nameInProgress,
+        rating: this.state.ratingInProgress,
+        imageURL: this.state.imageURLInProgress
+      },
+      nameInProgress: '',
+      ratingInProgress: '',
+      imageURLInProgress: ''
+    })
   }
 
   render() {
-    let buttonStyle = {
-      borderRadius: '30px'
-    }
-
     return (
       <div className="App">
         <header id="nav-bar">
@@ -30,18 +77,7 @@ class App extends Component {
         <main>
           <section>
             <h1>Shows</h1>
-            <div>
-              <div>
-                <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} Name="ST:TNG" allowDelete={true} buttonstyle={buttonStyle} />
-              </div>
-              <div>
-                <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} Name="ST: Voyager" allowDelete={true} buttonstyle={buttonStyle} />
-              </div>
-              <div>
-                {/* <button style={buttonStyle} onClick={this.clickedAdd()}>Add Show +</button> */}
-                {/* this is the add show button */}
-              </div>
-            </div>
+            {this.renderShows()}
           </section>
           <section>
             <h1>New/Edit Show</h1>
@@ -49,17 +85,17 @@ class App extends Component {
               <div>
                 <label>Name: </label>
                 {/* <input type="text" name="showname" /> */}
-                <input type="text" name="showname" value="Show Name" />
+                <input type="text" name="showname" value={this.state.nameInProgress} onChange={this.handleNameChange} />
               </div>
               <div>
                 <label>Rating: </label>
                 {/* <input type="text" name="showrating" /> */}
-                <input type="text" name="showrating" value="Show Rating" />
+                <input type="text" name="showrating" value={this.state.ratingInProgress} onChange={this.handleRatingChange} />
               </div>
               <div>
                 <label>Image URL: </label>
                 {/* <input type="text" name="showimage" /> */}
-                <input type="text" name="showimage" value="Image URL" />
+                <input type="text" name="showimage" value={this.state.imageURLInProgress} onChange={this.handleImageURLChange} />
               </div>
               <div>
                 <button onClick={this.saveShow}>Create/Update</button>

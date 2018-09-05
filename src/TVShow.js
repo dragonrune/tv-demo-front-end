@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 class TVShow extends Component {
     renderDelete = () => {
-        if (this.props.allowDelete)
+        if (this.props.allowDelete === true)
             return (
                 <button style={this.props.buttonstyle} onClick={this.props.deleteHandler}>Delete</button>
             )

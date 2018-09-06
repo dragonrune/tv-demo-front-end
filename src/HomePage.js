@@ -84,17 +84,14 @@ class App extends Component {
             <div>
               <div>
                 <label>Name: </label>
-                {/* <input type="text" name="showname" /> */}
                 <input type="text" name="showname" value={this.state.nameInProgress} onChange={this.handleNameChange} />
               </div>
               <div>
                 <label>Rating: </label>
-                {/* <input type="text" name="showrating" /> */}
                 <input type="text" name="showrating" value={this.state.ratingInProgress} onChange={this.handleRatingChange} />
               </div>
               <div>
                 <label>Image URL: </label>
-                {/* <input type="text" name="showimage" /> */}
                 <input type="text" name="showimage" value={this.state.imageURLInProgress} onChange={this.handleImageURLChange} />
               </div>
               <div>

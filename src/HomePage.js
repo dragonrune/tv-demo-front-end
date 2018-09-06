@@ -52,7 +52,7 @@ class App extends Component {
   }
 
   renderShows = () => {
-    return <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} Name={this.state.show.name} allowDelete={true} buttonstyle={this.state.buttonStyle} />
+    return <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} name={this.state.show.name} allowDelete={true} buttonstyle={this.state.buttonStyle} />
   }
 
   saveShow = () => {

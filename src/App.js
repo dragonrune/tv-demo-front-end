@@ -25,6 +25,7 @@ class App extends Component {
   }
 
   saveShow = (showToSave) => {
+    console.log(showToSave)
     this.setState({
       show: {
         name: showToSave.name,
@@ -34,11 +35,15 @@ class App extends Component {
     })
   }
 
+  renderManagePage=()=>{
+    return(<HomePage show={this.state.show} showDeleted={this.showDeleted} saveShow={this.saveShow} />)
+  }
+
   render() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={this.renderManagePage} />
           <Route path="/preview" component={PreviewPage} />
         </Switch>
       </Router>

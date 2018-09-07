@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import NavSite from './NavSite'
 import TVShow from './TVShow'
-import './App.css'
+// import './HomePage.css'
 
-class App extends Component {
+class HomePage extends Component {
 
   static PropTypes={
     show: PropTypes.object.isRequired,
@@ -106,4 +106,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default HomePage

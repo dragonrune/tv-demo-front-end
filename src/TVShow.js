@@ -19,7 +19,7 @@ class TVShow extends Component {
     render() {
         return (
             <div>
-                <button style={this.props.buttonstyle} onClick={this.props.selectHandler}>{this.props.Name}</button>
+                <button style={this.props.buttonstyle} onClick={this.props.selectHandler}>{this.props.name}</button>
                 {this.renderDelete()}
             </div>
         )

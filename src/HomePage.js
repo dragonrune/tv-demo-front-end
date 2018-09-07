@@ -6,7 +6,7 @@ import TVShow from './TVShow'
 
 class HomePage extends Component {
 
-  static PropTypes={
+  static propTypes={
     show: PropTypes.object.isRequired,
     showDeleted: PropTypes.func.isRequired,
     saveShow: PropTypes.func.isRequired
@@ -40,7 +40,12 @@ class HomePage extends Component {
   }
 
   tvShowSelected = () => {
-    return(console.log(this.props.show))
+    this.setState({
+      nameInProgress: this.props.show.name,
+      ratingInProgress: this.props.show.rating,
+      imageURLInProgress: this.props.show.imageURL
+    })
+    // return(console.log(this.props.show))
   }
 
   tvShowDeleted = () => {
@@ -52,7 +57,8 @@ class HomePage extends Component {
       name: this.state.nameInProgress,
       rating: this.state.ratingInProgress,
       imageURL: this.state.imageURLInProgress
-    }),
+    })
+
     this.setState({
       nameInProgress: '',
       ratingInProgress: '',

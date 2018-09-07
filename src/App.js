@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router,  Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import HomePage from './HomePage'
 import PreviewPage from './PreviewPage'
 import './App.css'
@@ -25,7 +25,7 @@ class App extends Component {
   }
 
   saveShow = (showToSave) => {
-    console.log(showToSave)
+    // console.log(showToSave)
     this.setState({
       show: {
         name: showToSave.name,
@@ -35,8 +35,8 @@ class App extends Component {
     })
   }
 
-  renderManagePage=()=>{
-    return(<HomePage show={this.state.show} showDeleted={this.showDeleted} saveShow={this.saveShow} />)
+  renderManagePage = () => {
+    return (<HomePage show={this.state.show} showDeleted={this.tvShowDeleted} saveShow={this.saveShow} />)
   }
 
   render() {

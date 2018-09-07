@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import NavSite from './NavSite'
 import TVShow from './TVShow'
-import './App.css'
+// import './PreviewPage.css'
 
-class App extends Component {
+class PreviewPage extends Component {
     render() {
         let buttonStyle = {
             borderRadius: '30px'
@@ -35,4 +35,4 @@ class App extends Component {
     }
 }
 
-export default App
+export default PreviewPage

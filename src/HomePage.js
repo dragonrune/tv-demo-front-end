@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import NavSite from './NavSite'
 import TVShow from './TVShow'
 import './App.css'
 
 class App extends Component {
+
+  static PropTypes={
+    show: PropTypes.object.isRequired,
+    showDeleted: PropTypes.func.isRequired,
+    saveShow: PropTypes.func.isRequired
+  }
 
   state = {
     buttonStyle: {
@@ -11,12 +18,7 @@ class App extends Component {
     },
     nameInProgress: '',
     ratingInProgress: '',
-    imageURLInProgress: '',
-    show: {
-      name: '',
-      rating: '',
-      ImageURL: ''
-    }
+    imageURLInProgress: ''
   }
 
   handleNameChange = (event) => {
@@ -38,34 +40,28 @@ class App extends Component {
   }
 
   tvShowSelected = () => {
-    return(console.log(this.state.show))
+    return(console.log(this.props.show))
   }
 
   tvShowDeleted = () => {
-    this.setState({
-      show: {
-        name: '',
-        rating: '',
-        imageURL: ''
-      }
-    })
-  }
-
-  renderShows = () => {
-    return <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} name={this.state.show.name} allowDelete={true} buttonstyle={this.state.buttonStyle} />
+    this.props.showDeleted()
   }
 
   saveShow = () => {
+    this.props.saveShow({
+      name: this.state.nameInProgress,
+      rating: this.state.ratingInProgress,
+      imageURL: this.state.imageURLInProgress
+    }),
     this.setState({
-      show: {
-        name: this.state.nameInProgress,
-        rating: this.state.ratingInProgress,
-        imageURL: this.state.imageURLInProgress
-      },
       nameInProgress: '',
       ratingInProgress: '',
       imageURLInProgress: ''
     })
+}
+
+  renderShows = () => {
+    return <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} name={this.props.show.name} allowDelete={true} buttonstyle={this.state.buttonStyle} />
   }
 
   render() {

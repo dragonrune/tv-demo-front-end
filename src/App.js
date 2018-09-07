@@ -5,6 +5,35 @@ import PreviewPage from './PreviewPage'
 import './App.css'
 
 class App extends Component {
+
+  state = {
+    show: {
+      name: '',
+      rating: '',
+      ImageURL: ''
+    }
+  }
+
+  tvShowDeleted = () => {
+    this.setState({
+      show: {
+        name: '',
+        rating: '',
+        imageURL: ''
+      }
+    })
+  }
+
+  saveShow = (showToSave) => {
+    this.setState({
+      show: {
+        name: showToSave.name,
+        rating: showToSave.rating,
+        imageURL: showToSave.imageURL
+      }
+    })
+  }
+
   render() {
     return (
       <Router>

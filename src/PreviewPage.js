@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import NavSite from './NavSite'
 import TVShow from './TVShow'
 // import './PreviewPage.css'
 
 class PreviewPage extends Component {
 
+    static propTypes = {
+        show: PropTypes.object.isRequired
+    }
+
     state = {
         buttonStyle: {
             borderRadius: '30px'
         },
         selectedShow: {
-            name: this.props.show.name,
-            rating: this.props.show.rating,
-            imageURL: this.props.show.imageURL
+            name: '',
+            rating: '',
+            imageURL: ''
         }
     }
 
     renderShows=()=>{
-        return (<TVShow name={this.state.selectedShow.name} selectHandler={this.props.show.showSelected} />)
+        return (<TVShow name={this.props.selectedShow.name} selectHandler={this.showSelected} />)
+    }
+
+    showSelected = () => {
+        this.setState ({
+            selectedShow: this.props.selectedShow
+        })
     }
 
     render() {

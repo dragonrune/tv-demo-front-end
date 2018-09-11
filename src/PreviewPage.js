@@ -4,10 +4,24 @@ import TVShow from './TVShow'
 // import './PreviewPage.css'
 
 class PreviewPage extends Component {
-    render() {
-        let buttonStyle = {
+
+    state = {
+        buttonStyle: {
             borderRadius: '30px'
+        },
+        selectedShow: {
+            name: this.props.show.name,
+            rating: this.props.show.rating,
+            imageURL: this.props.show.imageURL
         }
+    }
+
+    renderShows=()=>{
+        return (<TVShow name={this.state.selectedShow.name} selectHandler={this.props.show.showSelected} />)
+    }
+
+    render() {
+        console.log(this.state.show)
         return (
             <div className="App">
                 <header id="nav-bar">
@@ -16,15 +30,14 @@ class PreviewPage extends Component {
                 <main>
                     <section>
                         <h1>Shows</h1>
-                        <TVShow Name="ST:TNG" buttonstyle={buttonStyle} />
-                        <TVShow Name="ST:Voyager" buttonstyle={buttonStyle} />
+                        {this.renderShows()}
                     </section>
                     <section>
                         <div>
-                            <h2>Show 1</h2>
-                            <h2>PG</h2>
+                            <h2>{this.state.selectedShow.name}</h2>
+                            <h2>{this.state.selectedShow.rating}</h2>
                         </div>
-                        <img src="./bleach-hero.jpg" alt="Bleach Anime"/>
+                        <img src={this.state.selectedShow.imageURL} alt="Show Pic"/>
                     </section>
                 </main>
                 <footer>

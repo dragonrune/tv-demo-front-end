@@ -67,7 +67,11 @@ class HomePage extends Component {
 }
 
   renderShows = () => {
-    return <TVShow selectHandler={this.tvShowSelected} deleteHandler={this.tvShowDeleted} name={this.props.show.name} allowDelete={true} buttonstyle={this.state.buttonStyle} />
+    return <TVShow name={this.props.show.name}
+                   allowDelete={true}
+                   selectHandler={this.tvShowSelected}
+                   deleteHandler={this.tvShowDeleted}
+                   buttonstyle={this.state.buttonStyle} />
   }
 
   render() {

@@ -6,10 +6,11 @@ import TVShow from './TVShow'
 
 class HomePage extends Component {
 
-  static propTypes={
+  static propTypes = {
     show: PropTypes.object.isRequired,
     showDeleted: PropTypes.func.isRequired,
-    saveShow: PropTypes.func.isRequired
+    saveShow: PropTypes.func.isRequired,
+    tvShow: PropTypes.array.isRequired
   }
 
   state = {
@@ -64,14 +65,24 @@ class HomePage extends Component {
       ratingInProgress: '',
       imageURLInProgress: ''
     })
-}
+  }
 
-  renderShows = () => {
-    return <TVShow name={this.props.show.name}
-                   allowDelete={true}
-                   selectHandler={this.tvShowSelected}
-                   deleteHandler={this.tvShowDeleted}
-                   buttonstyle={this.state.buttonStyle} />
+  renderTVShows = () => {
+    const showsToRender = []
+
+    for (let i = 0; i < this.props.tvShows.length; i++) {
+      const tvShow = this.props.tvShows[i]
+      showsToRender.push(
+        <TVShow key={i} name={tvShow.name}
+          allowDelete={true}
+          selectHandler={this.tvShowSelected}
+          deleteHandler={this.tvShowDeleted}
+          buttonstyle={this.state.buttonStyle} />
+      )
+    }
+
+    return showsToRender
+
   }
 
   render() {
@@ -83,7 +94,7 @@ class HomePage extends Component {
         <main>
           <section>
             <h1>Shows</h1>
-            {this.renderShows()}
+            {this.renderTVShows()}
           </section>
           <section>
             <h1>New/Edit Show</h1>

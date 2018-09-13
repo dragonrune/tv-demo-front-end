@@ -68,20 +68,19 @@ class HomePage extends Component {
   }
 
   renderTVShows = () => {
-    const showsToRender = []
 
-    for (let i = 0; i < this.props.tvShows.length; i++) {
-      const tvShow = this.props.tvShows[i]
-      showsToRender.push(
-        <TVShow key={i} name={tvShow.name}
-          allowDelete={true}
-          selectHandler={this.tvShowSelected}
-          deleteHandler={this.tvShowDeleted}
-          buttonstyle={this.state.buttonStyle} />
-      )
-    }
+    const tvShow = this.props.tvShows.map(
+        (n,i) => {
+          return(<TVShow key={i} name={n.name}
+                         allowDelete={true}
+                         selectHandler={this.tvShowSelected}
+                         deleteHandler={this.tvShowDeleted}
+                         buttonstyle={this.state.buttonStyle} />
+          )
+        }
+    )
 
-    return showsToRender
+    return tvShow
 
   }
 

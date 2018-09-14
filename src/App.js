@@ -53,8 +53,8 @@ class App extends Component {
   }
 
   renderPreviewPage = () => {
-    console.log(this.state.show)
-    return (<PreviewPage show={this.state.show} selectedShow={this.state.show} />)
+    // console.log(this.state.show)
+    return (<PreviewPage tvShows={this.state.tvShows} selectedShow={this.state.show} />)
   }
 
   render() {

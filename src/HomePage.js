@@ -56,7 +56,7 @@ class HomePage extends Component {
   saveShow = () => {
     this.props.saveShow({
       name: this.state.nameInProgress,
-      rating: this.state.ratingInProgress,
+      rating: Number(this.state.ratingInProgress),
       imageURL: this.state.imageURLInProgress
     })
 
@@ -70,14 +70,14 @@ class HomePage extends Component {
   renderTVShows = () => {
 
     const tvShow = this.props.tvShows.map(
-        (n,i) => {
-          return(<TVShow key={i} name={n.name}
-                         allowDelete={true}
-                         selectHandler={this.tvShowSelected}
-                         deleteHandler={this.tvShowDeleted}
-                         buttonstyle={this.state.buttonStyle} />
-          )
-        }
+      (n, i) => {
+        return (<TVShow key={i} name={n.name}
+          allowDelete={true}
+          selectHandler={this.tvShowSelected}
+          deleteHandler={this.tvShowDeleted}
+          buttonstyle={this.state.buttonStyle} />
+        )
+      }
     )
 
     return tvShow

@@ -1,87 +1,102 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import NavSite from './NavSite'
 import TVShow from './TVShow'
-// import './HomePage.css'
 
 class HomePage extends Component {
-
-  static propTypes = {
-    show: PropTypes.object.isRequired,
-    showDeleted: PropTypes.func.isRequired,
-    saveShow: PropTypes.func.isRequired,
-    tvShow: PropTypes.array.isRequired
-  }
 
   state = {
     buttonStyle: {
       borderRadius: '30px'
     },
-    nameInProgress: '',
-    ratingInProgress: '',
-    imageURLInProgress: ''
+    name: '',
+    rating: '',
+    imageURL: ''
   }
 
   handleNameChange = (event) => {
     this.setState({
-      nameInProgress: event.target.value
+      name: event.target.value
     })
   }
 
   handleRatingChange = (event) => {
     this.setState({
-      ratingInProgress: event.target.value
+      rating: event.target.value
     })
   }
 
   handleImageURLChange = (event) => {
     this.setState({
-      imageURLInProgress: event.target.value
+      imageURL: event.target.value
     })
   }
 
-  tvShowSelected = () => {
-    this.setState({
-      nameInProgress: this.props.show.name,
-      ratingInProgress: this.props.show.rating,
-      imageURLInProgress: this.props.show.imageURL
+  componentDidMount() {
+    // GET -- grab list of TVShow from API
+    fetch('http://localhost:3030/shows', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
     })
-    // return(console.log(this.props.show))
+      .then((response) => response.json())
+      .then((tvShows) =>
+        this.setState({ tvShows })
+      )
+      .catch(() => {
+        return (this.setState({ errormessage: "Error- What the #$%^ did you do ?!" }))
+      })
   }
 
-  tvShowDeleted = () => {
-    this.props.showDeleted()
+  postData = () => {
+    fetch('http://localhost:3030/shows', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        rating: this.state.rating,
+        imageURL: this.state.imageURL
+      })
+    })
+      .then((response) => response.json())
+      .then((tvShows) =>
+        this.setState({ tvShows })
+        // tvShows: tvShows
+      )
+      .catch(() => {
+        return (this.setState({ errormessage: "Error- What the #$%^ did you do ?!" }))
+      })
   }
 
   saveShow = () => {
-    this.props.saveShow({
-      name: this.state.nameInProgress,
-      rating: Number(this.state.ratingInProgress),
-      imageURL: this.state.imageURLInProgress
-    })
+
+    this.postData()
 
     this.setState({
-      nameInProgress: '',
-      ratingInProgress: '',
-      imageURLInProgress: ''
+      name: '',
+      rating: '',
+      imageURL: ''
     })
   }
 
   renderTVShows = () => {
-
-    const tvShow = this.props.tvShows.map(
-      (n, i) => {
-        return (<TVShow key={i} name={n.name}
-          allowDelete={true}
-          selectHandler={this.tvShowSelected}
-          deleteHandler={this.tvShowDeleted}
-          buttonstyle={this.state.buttonStyle} />
-        )
-      }
-    )
-
-    return tvShow
-
+    if (this.state.tvShows) {
+      const tvShow = this.state.tvShows.map(
+        (n, i) => {
+          return (<TVShow key={i} name={n.name}
+            allowDelete={true}
+            selectHandler={this.tvShowSelected}
+            deleteHandler={this.tvShowDeleted}
+            buttonstyle={this.state.buttonStyle} />
+          )
+        }
+      )
+      return tvShow
+    }
   }
 
   render() {
@@ -100,15 +115,15 @@ class HomePage extends Component {
             <div>
               <div>
                 <label>Name: </label>
-                <input type="text" name="showname" value={this.state.nameInProgress} onChange={this.handleNameChange} />
+                <input type="text" name="showname" value={this.state.name} onChange={this.handleNameChange} />
               </div>
               <div>
                 <label>Rating: </label>
-                <input type="text" name="showrating" value={this.state.ratingInProgress} onChange={this.handleRatingChange} />
+                <input type="text" name="showrating" value={this.state.rating} onChange={this.handleRatingChange} />
               </div>
               <div>
                 <label>Image URL: </label>
-                <input type="text" name="showimage" value={this.state.imageURLInProgress} onChange={this.handleImageURLChange} />
+                <input type="text" name="showimage" value={this.state.imageURL} onChange={this.handleImageURLChange} />
               </div>
               <div>
                 <button onClick={this.saveShow}>Create/Update</button>

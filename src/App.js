@@ -49,7 +49,8 @@ class App extends Component {
   }
 
   renderManagePage = () => {
-    return (<HomePage tvShows={this.state.tvShows} tvShow={this.state.tvShow} showDeleted={this.tvShowDeleted} saveShow={this.saveTVShow} />)
+    // return (<HomePage tvShows={this.state.tvShows} tvShow={this.state.tvShow} showDeleted={this.tvShowDeleted} saveShow={this.saveTVShow} />)
+    return (<HomePage />)
   }
 
   renderPreviewPage = () => {

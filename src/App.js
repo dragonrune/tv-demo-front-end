@@ -36,7 +36,6 @@ class App extends Component {
   }
 
   saveTVShow = (showToSave) => {
-    console.log(showToSave)
     this.setState(
       (prevState) => ({
         tvShows: [...prevState.tvShows, {
@@ -49,17 +48,14 @@ class App extends Component {
   }
 
   renderManagePage = () => {
-    // return (<HomePage tvShows={this.state.tvShows} tvShow={this.state.tvShow} showDeleted={this.tvShowDeleted} saveShow={this.saveTVShow} />)
     return (<HomePage />)
   }
 
   renderPreviewPage = () => {
-    // console.log(this.state.show)
     return (<PreviewPage tvShows={this.state.tvShows} selectedShow={this.state.show} />)
   }
 
   render() {
-    console.log(this.state)
     return (
       <Router>
         <Switch>

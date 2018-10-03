@@ -31,45 +31,42 @@ class HomePage extends Component {
     })
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // GET -- grab list of TVShow from API
-    fetch('http://localhost:3030/shows', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then((response) => response.json())
-      .then((tvShows) =>
-        this.setState({ tvShows })
-      )
-      .catch(() => {
-        return (this.setState({ errormessage: "Error- What the #$%^ did you do ?!" }))
+    try {
+      const r = await fetch('http://localhost:3030/shows', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
+      const tvShows = await r.json()
+      this.setState({ tvShows })
+    } catch (error) {
+      return (this.setState({ errormessage: "Error- What the #$%^ did you do ?!" }))
+    }
   }
 
-  postData = () => {
-    fetch('http://localhost:3030/shows', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: this.state.name,
-        rating: this.state.rating,
-        imageURL: this.state.imageURL
+  async postData () {
+    try {
+      const r= await fetch('http://localhost:3030/shows', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: this.state.name,
+          rating: this.state.rating,
+          imageURL: this.state.imageURL
+        })
       })
-    })
-      .then((response) => response.json())
-      .then((tvShows) =>
-        this.setState({ tvShows })
-        // tvShows: tvShows
-      )
-      .catch(() => {
+      const tvShows = await r.json()
+      this.setState({ tvShows })
+    } catch (error) {
         return (this.setState({ errormessage: "Error- What the #$%^ did you do ?!" }))
-      })
+    }
   }
 
   saveShow = () => {

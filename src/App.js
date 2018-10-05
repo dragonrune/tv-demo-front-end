@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import HomePage from './HomePage'
 import PreviewPage from './PreviewPage'
 import './App.css'
 
 class App extends Component {
-
-  static propTypes = {
-    show: PropTypes.object.isRequired
-  }
 
   state = {
     selectedShow: {

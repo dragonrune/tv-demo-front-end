@@ -10,7 +10,8 @@ class HomePage extends Component {
     },
     name: '',
     rating: '',
-    imageURL: ''
+    imageURL: '',
+    tvShows: []
   }
 
   handleNameChange = (event) => {
@@ -80,8 +81,11 @@ class HomePage extends Component {
     })
   }
 
-  renderTVShows = () => {
-    if (this.state.tvShows) {
+   renderTVShows = () => {
+    console.log(this.state.tvShows)
+    if (this.state.tvShows === {}){
+    //   return
+    // } else {
       const tvShow = this.state.tvShows.map(
         (n, i) => {
           return (<TVShow key={i} name={n.name}

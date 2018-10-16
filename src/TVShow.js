@@ -6,7 +6,8 @@ class TVShow extends Component {
         name: PropTypes.string.isRequired,
         allowDelete: PropTypes.bool,
         selectHandler: PropTypes.func,
-        deleteHandler: PropTypes.func
+        deleteHandler: PropTypes.func,
+        id: PropTypes.string.isRequired
     }
 
     renderDelete = () => {
@@ -19,7 +20,7 @@ class TVShow extends Component {
     render() {
         return (
             <div>
-                <button style={this.props.buttonstyle} onClick={this.props.selectHandler}>{this.props.name}</button>
+                <button style={this.props.buttonstyle} onClick={()=>this.props.selectHandler(this.props.id)}>{this.props.name}</button>
                 {this.renderDelete()}
             </div>
         )

@@ -11,7 +11,8 @@ class HomePage extends Component {
     name: '',
     rating: '',
     imageURL: '',
-    tvShows: []
+    tvShows: [],
+    message: ''
   }
 
   handleNameChange = (event) => {
@@ -49,24 +50,24 @@ class HomePage extends Component {
     }
   }
 
-  async postData () {
-    try {
-      const r= await fetch('http://localhost:3030/shows', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: this.state.name,
-          rating: this.state.rating,
-          imageURL: this.state.imageURL
-        })
+  postData = async () => {
+    const r = await fetch('http://localhost:3030/shows', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        rating: this.state.rating,
+        imageURL: this.state.imageURL
       })
-      const tvShows = await r.json()
+    })
+    const tvShows = await r.json()
+    if (tvShows.isJoi) {
+      this.setState({ message: tvShows.details[0].message })
+    } else {
       this.setState({ tvShows })
-    } catch (error) {
-        return (this.setState({ errormessage: "Error- What the #$%^ did you do ?!" }))
     }
   }
 
@@ -81,22 +82,45 @@ class HomePage extends Component {
     })
   }
 
-   renderTVShows = () => {
-    console.log(this.state.tvShows)
-    if (this.state.tvShows === {}){
-    //   return
-    // } else {
+  async find_show(id) {
+    // GET -- grab a specific TVShow from API
+    try {
+      const r = await fetch(`http://localhost:3030/shows/${id}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      const tvShows = await r.json()
+      this.setState({ tvShows })
+    } catch (error) {
+      return this.setState({ errormessage: "Error- What the #$%^ did you do ?!" })
+    }
+  }
+
+  tvShowSelected (k) { this.find_show(k) }
+
+  renderTVShows = () => {
+    if (this.state.tvShows) {
       const tvShow = this.state.tvShows.map(
-        (n, i) => {
-          return (<TVShow key={i} name={n.name}
+        (n) => {
+          return (<TVShow key={n._id} name={n.name}
             allowDelete={true}
             selectHandler={this.tvShowSelected}
             deleteHandler={this.tvShowDeleted}
-            buttonstyle={this.state.buttonStyle} />
+            buttonstyle={this.state.buttonStyle}
+            id={n._id} />
           )
         }
       )
       return tvShow
+    }
+  }
+
+  renderErrorMessage = () => {
+    if (this.state.message) {
+      return this.state.message
     }
   }
 
@@ -112,6 +136,7 @@ class HomePage extends Component {
             {this.renderTVShows()}
           </section>
           <section>
+            {this.renderErrorMessage()}
             <h1>New/Edit Show</h1>
             <div>
               <div>

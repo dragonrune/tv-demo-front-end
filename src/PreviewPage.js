@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import NavSite from './NavSite'
 import TVShow from './TVShow'
 // import './PreviewPage.css'
 
 class PreviewPage extends Component {
 
-    static propTypes = {
-        tvShows: PropTypes.array.isRequired,
-        show: PropTypes.object.isRequired
-    }
+    // static propTypes = {
+    //     show: PropTypes.object.isRequired
+    // }
 
     state = {
         buttonStyle: {
@@ -22,41 +21,58 @@ class PreviewPage extends Component {
         }
     }
 
+    async componentDidMount() {
+        // GET -- grab list of TVShow from API
+        try {
+            const r = await fetch('http://localhost:3030/shows', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            const tvShows = await r.json()
+            this.setState({ tvShows })
+        } catch (error) {
+            return (this.setState({ errormessage: "Error- What the #$%^ did you do ?!" }))
+        }
+    }
+
     calcAvgRating = () => {
-        if (this.props.tvShows.length === 0)
+        if (!this.state.tvShows)
             return 0
 
-        if (this.props.tvShows.length === 1)
-            return this.props.tvShows[0].rating
+        if (this.state.tvShows.length === 1)
+            return this.state.tvShows[0].rating
 
-        const totRating = this.props.tvShows.reduce(
+        const totRating = this.state.tvShows.reduce(
             (totalRating, tvShow) => {
                 return (totalRating.rating || totalRating) + tvShow.rating
             }
         )
-        return Math.round((totRating / this.props.tvShows.length) * 100) / 100
+        return Math.round((totRating / this.state.tvShows.length) * 100) / 100
     }
 
     renderTVShows = () => {
-        const tvShow=this.props.tvShows.filter (
-            (ratedlist) => {
-                return ratedlist.rating < 5
-            }
-        ).map ((e) => {
-            return (<TVShow name={e.name} selectHandler={this.showSelected} />)
-        })
-
-        return tvShow
+        if (this.state.tvShows) {
+            const tvShow = this.state.tvShows.filter(
+                (ratedlist) => {
+                    return ratedlist.rating < 5
+                }
+            ).map((e,i) => {
+                return (<TVShow key={i} name={e.name} selectHandler={this.tvShowSelected} />)
+            })
+            return tvShow
+        }
     }
 
-    showSelected = () => {
+    tvShowSelected = () => {
         this.setState({
-            selectedShow: this.props.selectedShow
+            selectedShow: this.state.selectedShow
         })
     }
 
     render() {
-        console.log(this.renderTVShows)
         return (
             <div className="App">
                 <header id="nav-bar">
